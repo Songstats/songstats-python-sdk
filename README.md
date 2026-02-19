@@ -2,8 +2,8 @@
 
 Official Python client for the **Songstats Enterprise API**.
 
-📦 PyPI: https://pypi.org/project/songstats-sdk/  
-📚 API Documentation: https://docs.songstats.com
+📚 API Documentation: https://docs.songstats.com  
+🔑 API Key Access: Please contact api@songstats.com
 
 ---
 
