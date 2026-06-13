@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import httpx
 
-from .http import SongstatsHTTPClient
+from .http import DEFAULT_BASE_URL, SongstatsHTTPClient
 from .resources import (
     ArtistsAPI,
     CollaboratorsAPI,
@@ -17,7 +17,7 @@ class SongstatsClient:
         self,
         *,
         api_key: str,
-        base_url: str = "https://data.songstats.com",
+        base_url: str = DEFAULT_BASE_URL,
         timeout: float = 30.0,
         max_retries: int = 2,
         user_agent: str | None = None,

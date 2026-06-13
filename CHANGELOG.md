@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.1.1] - 2026-06-14
+
+### Changed
+
+- Updated the default Enterprise API host from `data.songstats.com` to `api.songstats.com`.
+
 ## [0.1.0] - 2026-02-19
 
 ### Added

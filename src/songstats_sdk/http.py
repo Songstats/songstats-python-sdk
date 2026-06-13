@@ -8,7 +8,7 @@ import httpx
 from .exceptions import SongstatsAPIError, SongstatsTransportError
 from .version import VERSION
 
-DEFAULT_BASE_URL = "https://data.songstats.com"
+DEFAULT_BASE_URL = "https://api.songstats.com"
 DEFAULT_TIMEOUT_SECONDS = 30.0
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
