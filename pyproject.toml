@@ -35,7 +35,7 @@ dev = [
 
 [project.urls]
 Homepage = "https://songstats.com"
-Documentation = "https://docs.songstats.com"
+Documentation = "https://developers.stats.company/songstats"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/songstats_sdk"]
