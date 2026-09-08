@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.1.2] - 2026-09-08
+
+### Changed
+
+- Updated API documentation links to `developers.stats.company/songstats`.
+
 ## [0.1.1] - 2026-06-14
 
 ### Changed
