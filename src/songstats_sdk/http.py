@@ -31,15 +31,16 @@ class SongstatsHTTPClient:
 
         self.base_url = base_url.rstrip("/")
         self.max_retries = max_retries
+        self._timeout = timeout
+        self._headers = {
+            "apikey": api_key,
+            "accept": "application/json",
+            "user-agent": user_agent or f"songstats-python-sdk/{VERSION}",
+        }
         self._owns_client = httpx_client is None
         self._client = httpx_client or httpx.Client(
             base_url=self.base_url,
             timeout=timeout,
-            headers={
-                "apikey": api_key,
-                "accept": "application/json",
-                "user-agent": user_agent or f"songstats-python-sdk/{VERSION}",
-            },
         )
 
     def close(self) -> None:
@@ -54,20 +55,29 @@ class SongstatsHTTPClient:
         params: Mapping[str, Any] | None = None,
         json: Mapping[str, Any] | None = None,
     ) -> Any:
-        endpoint = f"/enterprise/v1/{path.lstrip('/')}"
+        endpoint = f"{self.base_url}/enterprise/v1/{path.lstrip('/')}"
+        retries = self.max_retries if method.upper() in {"GET", "HEAD"} else 0
         last_transport_error: Exception | None = None
 
-        for attempt in range(self.max_retries + 1):
+        for attempt in range(retries + 1):
             try:
-                response = self._client.request(method=method, url=endpoint, params=params, json=json)
+                response = self._client.request(
+                    method=method,
+                    url=endpoint,
+                    params=params,
+                    json=json,
+                    headers=self._headers,
+                    timeout=self._timeout,
+                    follow_redirects=False,
+                )
             except httpx.RequestError as exc:
                 last_transport_error = exc
-                if attempt < self.max_retries:
+                if attempt < retries:
                     time.sleep(0.2 * (2**attempt))
                     continue
                 raise SongstatsTransportError(str(exc)) from exc
 
-            if response.status_code in RETRYABLE_STATUS_CODES and attempt < self.max_retries:
+            if response.status_code in RETRYABLE_STATUS_CODES and attempt < retries:
                 time.sleep(0.2 * (2**attempt))
                 continue
 
