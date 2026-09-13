@@ -10,6 +10,12 @@ All notable changes to this project are documented in this file.
 - Disable redirects so the API key is not forwarded to a redirected endpoint.
 - Retry only GET and HEAD requests; ambiguous write failures are surfaced after one attempt.
 
+## [0.1.2] - 2026-09-08
+
+### Changed
+
+- Updated API documentation links to `developers.stats.company/songstats`.
+
 ## [0.1.1] - 2026-06-14
 
 ### Changed
